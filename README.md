@@ -30,7 +30,7 @@ It is designed to do basic operations and calculations and has 2 modes as detail
       multiplication
       additive inverse
       subtraction
- <b>Operations only available in scientific mode:
+ Operations only available in scientific mode:
       factorials
       natural logarithm
       logarithm base 10
