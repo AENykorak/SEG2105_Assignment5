@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
         /**
         * DECIMAL ACTION ON CLICK
-        * IF DEC IS ALREADY SET RETURNS PERFORMING NO ACTION PREVENTING ODD BEHAVIOUS
+        * IF DEC IS ALREADY SET RETURNS PERFORMING NO ACTION PREVENTING ODD BEHAVIOURS
         *       EG: 5.5.5
         *       EG: LOG(5).4
         * INPUTS A DECIMAL ON BOTH SCREENS AFTER THE PREVIOUSLY PRESSED NUMBER
@@ -358,22 +358,19 @@ public class MainActivity extends AppCompatActivity {
 
         /**
         * EQUAL ACTION ON CLICK
-        * IF ONE OF THE OPERATION BOOLEAN ACTIONS IS ACTIVE
-        * IT ADDS THE PREVIOUSLY PRESSED NUMBER TO THE LIST
-        * IF THE LIST IS EVEN LENGTH THEN EQUALS IS NOT CARRIED OUT,
-        * AS THIS MEANS THERE ARE NOT ENOUGH VARIABLE IN THE LIST
-        * THE ACTION WILL THEN GO THROUGH THE LIST FOLLOWING ORDER OF OPERATIONS,
-        * REMOVING OPERATION SYMBOLS AS THEY COME UP FOLLOWED BY SURROUNDING NUMBERS.
-        * THE EQUATION IS THEN CARRIED OUT AND THE NEXT OPERATION IS FOUND.
-        *     IF 2 OPERATIONS ARE FOUND TOGETHER AN ERROR OCCURS
-        *     IF THE USER ATTEMPTS TO DIVIDE BY 0 AN ERROR OCCURS
-        *     THIS CALCULATOR HAS CHOSEN TO GO BY THE COMMON CONCEPTION THAT MOD0 WILL PRODUCE AN ERROR
-        * ADDS THE SYMBOL = TO SCREEN 2, THEN OUTPUT THE TOTAL TO BOTH SCREENS
-        * SETS DEC TO TRUE, EQL TO TRUE AND ALL OPERATION BOOLEAN VALUES TO FALSE
+        * IF ONE OF THE OPERATION BOOLEAN ACTIONS IS ACTIVE AND SCREEN 1 IS NOT BLANK
+        * PERFORMS THE FOLLOWING ACTIONS:
+        *       IT ADDS THE PREVIOUSLY PRESSED NUMBER TO THE LIST
+        *       THE ACTION WILL THEN GO THROUGH THE LIST FOLLOWING ORDER OF OPERATIONS,
+        *       REMOVING OPERATION SYMBOLS AS THEY COME UP FOLLOWED BY SURROUNDING NUMBERS.
+        *       THE EQUATION IS THEN CARRIED OUT AND THE NEXT OPERATION IS FOUND.
+        *           IF THE USER ATTEMPTS TO DIVIDE BY 0 AN ERROR OCCURS
+        *           THIS CALCULATOR HAS CHOSEN TO GO BY THE COMMON CONCEPTION THAT MOD0 WILL PRODUCE AN ERROR
+        *       OUTPUTS THE TOTAL TO BOTH SCREENS
+        *       SETS DEC TO TRUE, EQL TO TRUE AND ALL OPERATION BOOLEAN VALUES TO FALSE
         *
-        * @exception Symbols Out Of Sequence if user inputs two sequential operators
-        * @exception Cannot Divide by 0 if user attempts to divide by 0
-        * @exception Mod 0 Undefined if user attempts Mod 0
+        * @error Cannot Divide by 0 if user attempts to divide by 0
+        * @error Mod 0 Undefined if user attempts Mod 0
         */
         buttonEqual.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -382,57 +379,20 @@ public class MainActivity extends AppCompatActivity {
                     edttxt.setText("0");
                     error = false;
                 }
-                if (add || sub || mul || div || pow || mod) {
+                if (edttxt.getText().length()!=0&&(add || sub || mul || div || pow || mod)) {
                     list.add((String) edttxt.getText());
-                    if (list.size() % 2 == 0) return;
                     for (int i = 0; i < list.size() - 1; i++) {
                         if (list.get(i).equals("^X")) {
-                            try {
-                                val_one = Float.parseFloat(list.remove(--i));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                edttxt2.setText("");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
-                            try {
-                                val_two = Float.parseFloat(list.remove(i + 1));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                edttxt2.setText("");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
+                            val_one = Float.parseFloat(list.remove(--i));
+                            val_two = Float.parseFloat(list.remove(i + 1));
                             total = (float) Math.pow((double) val_one, (double) val_two);
                             list.set(i, String.valueOf(total));
                         }
                     }
                     for (int i = 0; i < list.size() - 1; i++) {
                         if (list.get(i).equals("*") || list.get(i).equals("/") || list.get(i).equals("%")) {
-                            try {
-                                val_one = Float.parseFloat(list.remove(--i));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                edttxt2.setText("");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
-                            try {
-                                val_two = Float.parseFloat(list.remove(i + 1));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                edttxt2.setText("");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
+                            val_one = Float.parseFloat(list.remove(--i));
+                            val_two = Float.parseFloat(list.remove(i + 1));
                             if (list.get(i).equals("*"))
                                 total = val_one * val_two;
                             if (list.get(i).equals("/"))
@@ -460,24 +420,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     for (int j = 0; j < list.size() - 1; j++) {
                         if (list.get(j).equals("+") || list.get(j).equals("-")) {
-                            try {
-                                val_one = Float.parseFloat(list.remove(--j));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
-                            try {
-                                val_two = Float.parseFloat(list.remove(j + 1));
-                            } catch (Exception e) {
-                                edttxt.setText("Symbols Out Of Sequence");
-                                error = true;
-                                list = new ArrayList<>();
-                                val_one = val_two = total = Float.parseFloat("0");
-                                return;
-                            }
+                            val_one = Float.parseFloat(list.remove(--j));
+                            val_two = Float.parseFloat(list.remove(j + 1));
                             if (list.get(j).equals("+"))
                                 total = val_one + val_two;
                             if (list.get(j).equals("-"))
