@@ -50,33 +50,34 @@ import java.math.BigInteger;
 
 public class MainActivity extends AppCompatActivity {
     //region STATIC DECLARATIONS FOR STATE RETENTION
+    static final String STATE_ABS = "abs";
     static final String STATE_ADD = "add";
     static final String STATE_DEC = "dec";
     static final String STATE_DIV = "div";
+    static final String STATE_EQL = "eql";
     static final String STATE_ERROR = "error";
+    static final String STATE_EUL = "eul";
+    static final String STATE_FACT = "fact";
+    static final String STATE_INV = "inv";
     static final String STATE_LIST = "numList";
+    static final String STATE_LN = "ln";
+    static final String STATE_LOG = "log";
     static final String STATE_MOD = "mod";
     static final String STATE_MUL = "mul";
+    static final String STATE_NUM = "num";
+    static final String STATE_PI = "pi";
     static final String STATE_POW = "pow";
+    static final String STATE_ROOT = "root";
+    static final String STATE_SCI = "sci";
+    static final String STATE_SQR = "sqr";
+    static final String STATE_STORE = "store";
     static final String STATE_SUB = "sub";
     static final String STATE_TEXT = "textOne";
     static final String STATE_TEXT2 = "textTwo";
     static final String STATE_TOTAL = "total";
     static final String STATE_VAL1 = "valOne";
     static final String STATE_VAL2 = "valTwo";
-    static final String STATE_STORE = "store";
-    static final String STATE_PI = "pi";
-    static final String STATE_NUM = "num";
-    static final String STATE_EUL = "eul";
-    static final String STATE_SCI = "sci";
-    static final String STATE_ROOT = "root";
-    static final String STATE_SQR = "sqr";
-    static final String STATE_LOG = "log";
-    static final String STATE_LN = "ln";
-    static final String STATE_FACT = "fact";
-    static final String STATE_ABS = "abs";
-    static final String STATE_INV = "inv";
-    static final String STATE_EQL = "eql";
+
     //endregion
 
     //region DECLARATION AND INITIALIZATION OF VARIABLES
@@ -140,30 +141,30 @@ public class MainActivity extends AppCompatActivity {
             list.addAll((ArrayList<String>) savedInstanceState.getSerializable(STATE_LIST));
             edttxt.setText(savedInstanceState.getString(STATE_TEXT));
             edttxt2.setText(savedInstanceState.getString(STATE_TEXT2));
+            store = savedInstanceState.getString(STATE_STORE);
+            total = savedInstanceState.getFloat(STATE_TOTAL);
             val_one = savedInstanceState.getFloat(STATE_VAL1);
             val_two = savedInstanceState.getFloat(STATE_VAL2);
-            total = savedInstanceState.getFloat(STATE_TOTAL);
-            store = savedInstanceState.getString(STATE_TOTAL);
-            add = savedInstanceState.getBoolean(STATE_ADD);
-            sub = savedInstanceState.getBoolean(STATE_SUB);
-            mul = savedInstanceState.getBoolean(STATE_MUL);
-            div = savedInstanceState.getBoolean(STATE_DIV);
-            dec = savedInstanceState.getBoolean(STATE_DEC);
-            pow = savedInstanceState.getBoolean(STATE_POW);
-            mod = savedInstanceState.getBoolean(STATE_MOD);
-            error = savedInstanceState.getBoolean(STATE_ERROR);
-            pi = savedInstanceState.getBoolean(STATE_PI);
-            num = savedInstanceState.getBoolean(STATE_NUM);
-            eul = savedInstanceState.getBoolean(STATE_EUL);
-            sci = savedInstanceState.getBoolean(STATE_SCI);
-            root = savedInstanceState.getBoolean(STATE_ROOT);
-            sqr = savedInstanceState.getBoolean(STATE_SQR);
-            log = savedInstanceState.getBoolean(STATE_LOG);
-            ln = savedInstanceState.getBoolean(STATE_LN);
-            fact = savedInstanceState.getBoolean(STATE_FACT);
             abs = savedInstanceState.getBoolean(STATE_ABS);
-            inv = savedInstanceState.getBoolean(STATE_INV);
+            add = savedInstanceState.getBoolean(STATE_ADD);
+            dec = savedInstanceState.getBoolean(STATE_DEC);
+            div = savedInstanceState.getBoolean(STATE_DIV);
             eql = savedInstanceState.getBoolean(STATE_EQL);
+            error = savedInstanceState.getBoolean(STATE_ERROR);
+            eul = savedInstanceState.getBoolean(STATE_EUL);
+            fact = savedInstanceState.getBoolean(STATE_FACT);
+            inv = savedInstanceState.getBoolean(STATE_INV);
+            ln = savedInstanceState.getBoolean(STATE_LN);
+            log = savedInstanceState.getBoolean(STATE_LOG);
+            mod = savedInstanceState.getBoolean(STATE_MOD);
+            mul = savedInstanceState.getBoolean(STATE_MUL);
+            num = savedInstanceState.getBoolean(STATE_NUM);
+            pi = savedInstanceState.getBoolean(STATE_PI);
+            pow = savedInstanceState.getBoolean(STATE_POW);
+            root = savedInstanceState.getBoolean(STATE_ROOT);
+            sci = savedInstanceState.getBoolean(STATE_SCI);
+            sqr = savedInstanceState.getBoolean(STATE_SQR);
+            sub = savedInstanceState.getBoolean(STATE_SUB);
         }
         //endregion
 
@@ -596,45 +597,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(getResources().getConfiguration().orientation==2) {
 
-
-            /**
-            * PI ACTION ON CLICK
-            * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
-            * IF SCREEN 1 IS NOT BLANK AND DEC OR NUM ARE NOT TRUE PERFORMS THE FOLLOWING ACTIONS:
-            *       INPUTS THE NUMERICAL VALUE OF PI ON SCREEN 1
-            *       INPUTS THE SYMBOL π AT THE END OF SCREEN 2
-            *       SETS DEC TO TRUE AND PI TO TRUE
-            */
-            buttonPi.setOnClickListener((v) -> {
-                if(error){ edttxt.setText(""); error=false;}
-                if(edttxt==null|| dec || num){assert true;}
-                else {
-                    edttxt.setText(String.valueOf(Math.PI));
-                    edttxt2.setText(edttxt2.getText() + "π");
-                    dec=true;
-                    pi=true;
-                }
-            });
-
-            /**
-            * EULER'S CONSTANT ACTION ON CLICK
-            * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
-            * IF SCREEN 1 IS NOT BLANK AND DEC OR NUM ARE NOT TRUE PERFORMS THE FOLLOWING ACTIONS:
-            *       INPUTS THE NUMERICAL VALUE OF EULER'S CONSTANT ON SCREEN 1
-            *       INPUTS THE SYMBOL e AT THE END OF SCREEN 2
-            *       SETS DEC TO TRUE AND EUL TO TRUE
-            */
-            buttonEul.setOnClickListener((v) -> {
-                if(error){ edttxt.setText(""); error=false;}
-                if(edttxt==null|| dec || num){assert true;}
-                else {
-                    edttxt.setText(String.valueOf(Math.exp(1)));
-                    edttxt2.setText(edttxt2.getText() + "e");
-                    dec=true;
-                    eul=true;
-                }
-            });
-
             /**
              * ABSOLUTE VALUE ACTION ON CLICK
              * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
@@ -668,6 +630,70 @@ public class MainActivity extends AppCompatActivity {
             });
 
             /**
+            * EULER'S CONSTANT ACTION ON CLICK
+            * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
+            * IF SCREEN 1 IS NOT BLANK AND DEC OR NUM ARE NOT TRUE PERFORMS THE FOLLOWING ACTIONS:
+            *       INPUTS THE NUMERICAL VALUE OF EULER'S CONSTANT ON SCREEN 1
+            *       INPUTS THE SYMBOL e AT THE END OF SCREEN 2
+            *       SETS DEC TO TRUE AND EUL TO TRUE
+            */
+            buttonEul.setOnClickListener((v) -> {
+                if(error){ edttxt.setText(""); error=false;}
+                if(edttxt==null|| dec || num){assert true;}
+                else {
+                    edttxt.setText(String.valueOf(Math.exp(1)));
+                    edttxt2.setText(edttxt2.getText() + "e");
+                    dec=true;
+                    eul=true;
+                }
+            });
+
+            /**
+             * FACTORIAL ACTION ON CLICK
+             * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
+             * IF SCREEN 1 IS NOT BLANK OR GREATER THAN 47 PERFORMS THE FOLLOWING ACTIONS:
+             *       SET I EQUAL TO 1
+             *       INCREMENTS THE VALUE I, MULTIPLYING IT BY ITSELF UNTIL I IS EQUAL TO OR GREATER THAN THE LAST NUMBER PRESSED
+             *       OUTPUTS THE TOTAL TO SCREEN 1
+             *       ADDS THE SYMBOL ! TO THE END OF SCREEN 2
+             *       SETS FACT TO TRUE
+             * NOTE: DOES NOT IMPLEMENT THE GAMMA FUNCTION, SO ALL DECIMAL VALUES WILL RESULT IN INCORRECT RESULTS
+             *
+             * ERROR - IF AN INPUT GREATER THAN 47 IS PASSED TO THE ACTION AN ERROR MESSAGE OF
+             * "NUMBER TO LARGE. OVERFLOW." IS DISPLAYED AND AN ERROR STATE IS INVOKED.
+             */
+            buttonFact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (error) {
+                        edttxt.setText("0");
+                        error = false;
+                    }
+                    if (((String) edttxt.getText()).equals("")) {
+                    }
+                    else if(Float.parseFloat((String) edttxt.getText())>47){
+                        edttxt.setText("Number too large. Overflow.");
+                        edttxt2.setText("");
+                        error=true;
+                        list=new ArrayList<>();
+                        val_one=val_two=total=Float.parseFloat("0");
+                        return;
+                    }
+                    else {
+                        float end=Float.parseFloat((String) edttxt.getText());
+                        store = (String)edttxt.getText();
+                        BigInteger sum = BigInteger.ONE;
+                        for (int i = 1; i <= end; i++) {
+                            sum=sum.multiply(BigInteger.valueOf(i));
+                        }
+                        edttxt.setText(String.valueOf(sum));
+                        edttxt2.setText((String)edttxt2.getText()+(char)33);
+                        fact=true;
+                    }
+                }
+            });
+
+            /**
              * MULTIPLICATIVE INVERSE ACTION ON CLICK
              * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
              * IF SCREEN 1 IS NOT BLANK AND IS NOT EQUAL TO 0 PERFORMS THE FOLLOWING ACTIONS:
@@ -680,7 +706,6 @@ public class MainActivity extends AppCompatActivity {
              * ERROR - IF AN INPUT OF 0 IS PASSED TO THE ACTION AN ERROR MESSAGE OF
              * "CANNOT DIVIDE BY 0" IS DISPLAYED AND AN ERROR STATE IS INVOKED
              */
-
             buttonInv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -715,51 +740,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         edttxt.setText(String.valueOf(1 / Float.parseFloat((String) edttxt.getText())));
                         inv = true;
-                    }
-                }
-            });
-
-            /**
-            * FACTORIAL ACTION ON CLICK
-            * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
-            * IF SCREEN 1 IS NOT BLANK OR GREATER THAN 47 PERFORMS THE FOLLOWING ACTIONS:
-            *       SET I EQUAL TO 1
-            *       INCREMENTS THE VALUE I, MULTIPLYING IT BY ITSELF UNTIL I IS EQUAL TO OR GREATER THAN THE LAST NUMBER PRESSED
-            *       OUTPUTS THE TOTAL TO SCREEN 1
-            *       ADDS THE SYMBOL ! TO THE END OF SCREEN 2
-            *       SETS FACT TO TRUE
-            * NOTE: DOES NOT IMPLEMENT THE GAMMA FUNCTION, SO ALL DECIMAL VALUES WILL RESULT IN INCORRECT RESULTS
-            *
-            * ERROR - IF AN INPUT GREATER THAN 47 IS PASSED TO THE ACTION AN ERROR MESSAGE OF
-            * "NUMBER TO LARGE. OVERFLOW." IS DISPLAYED AND AN ERROR STATE IS INVOKED.
-            */
-            buttonFact.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (error) {
-                        edttxt.setText("0");
-                        error = false;
-                    }
-                    if (((String) edttxt.getText()).equals("")) {
-                    }
-                    else if(Float.parseFloat((String) edttxt.getText())>47){
-                        edttxt.setText("Number too large. Overflow.");
-                        edttxt2.setText("");
-                        error=true;
-                        list=new ArrayList<>();
-                        val_one=val_two=total=Float.parseFloat("0");
-                        return;
-                    }
-                    else {
-                        float end=Float.parseFloat((String) edttxt.getText());
-                        store = (String)edttxt.getText();
-                        BigInteger sum = BigInteger.ONE;
-                        for (int i = 1; i <= end; i++) {
-                            sum=sum.multiply(BigInteger.valueOf(i));
-                        }
-                        edttxt.setText(String.valueOf(sum));
-                        edttxt2.setText((String)edttxt2.getText()+(char)33);
-                        fact=true;
                     }
                 }
             });
@@ -891,14 +871,33 @@ public class MainActivity extends AppCompatActivity {
             });
 
             /**
+             * PI ACTION ON CLICK
+             * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
+             * IF SCREEN 1 IS NOT BLANK AND DEC OR NUM ARE NOT TRUE PERFORMS THE FOLLOWING ACTIONS:
+             *       INPUTS THE NUMERICAL VALUE OF PI ON SCREEN 1
+             *       INPUTS THE SYMBOL π AT THE END OF SCREEN 2
+             *       SETS DEC TO TRUE AND PI TO TRUE
+             */
+            buttonPi.setOnClickListener((v) -> {
+                if(error){ edttxt.setText(""); error=false;}
+                if(edttxt==null|| dec || num){assert true;}
+                else {
+                    edttxt.setText(String.valueOf(Math.PI));
+                    edttxt2.setText(edttxt2.getText() + "π");
+                    dec=true;
+                    pi=true;
+                }
+            });
+
+            /**
             * POWER OF ACTION ON CLICK
             * IF ENTERED THROUGH ERROR STATE WILL SET SCREEN 1 TO BLANK AND ERROR STATE TO FALSE
             * IF SCREEN 1 IS NOT BLANK PERFORMS THE FOLLOWING ACTIONS:
             *       ADDS THE PREVIOUSLY PRESSED NUMBER TO THE LIST
             *       FOLLOWED BY THE SYMBOL ^X
             *       THEN ADDS THE SYMBOL ^ AT THE END OF SCREEN 2
-             *      SETS POW TO TRUE, DEC TO FALSE, EQL TO FALSE AND RUNS NEGATEBOOL METHOD
-             *      FINALLY, EMPTIES SCREEN 1
+            *      SETS POW TO TRUE, DEC TO FALSE, EQL TO FALSE AND RUNS NEGATEBOOL METHOD
+            *      FINALLY, EMPTIES SCREEN 1
             */
             buttonPow.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -1113,32 +1112,32 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putSerializable(STATE_LIST, list);
+        outState.putString(STATE_STORE, store);
         outState.putString(STATE_TEXT, edttxt.getText().toString());
         outState.putString(STATE_TEXT2, edttxt2.getText().toString());
+        outState.putFloat(STATE_TOTAL, total);
         outState.putFloat(STATE_VAL1, val_one);
         outState.putFloat(STATE_VAL2, val_two);
-        outState.putFloat(STATE_TOTAL, total);
-        outState.putBoolean(STATE_ADD, add);
-        outState.putBoolean(STATE_SUB, sub);
-        outState.putBoolean(STATE_MUL, mul);
-        outState.putBoolean(STATE_DIV, div);
-        outState.putBoolean(STATE_DEC, dec);
-        outState.putBoolean(STATE_POW, pow);
-        outState.putBoolean(STATE_MOD, mod);
-        outState.putBoolean(STATE_ERROR, error);
-        outState.putString(STATE_STORE, store);
-        outState.putBoolean(STATE_PI, pi);
-        outState.putBoolean(STATE_NUM, num);
-        outState.putBoolean(STATE_EUL, eul);
-        outState.putBoolean(STATE_SCI, sci);
-        outState.putBoolean(STATE_ROOT, root);
-        outState.putBoolean(STATE_SQR, sqr);
-        outState.putBoolean(STATE_LOG, log);
-        outState.putBoolean(STATE_LN, ln);
-        outState.putBoolean(STATE_FACT, fact);
         outState.putBoolean(STATE_ABS, abs);
-        outState.putBoolean(STATE_INV, inv);
+        outState.putBoolean(STATE_ADD, add);
+        outState.putBoolean(STATE_DEC, dec);
+        outState.putBoolean(STATE_DIV, div);
         outState.putBoolean(STATE_EQL, eql);
+        outState.putBoolean(STATE_ERROR, error);
+        outState.putBoolean(STATE_EUL, eul);
+        outState.putBoolean(STATE_FACT, fact);
+        outState.putBoolean(STATE_INV, inv);
+        outState.putBoolean(STATE_LN, ln);
+        outState.putBoolean(STATE_LOG, log);
+        outState.putBoolean(STATE_MOD, mod);
+        outState.putBoolean(STATE_MUL, mul);
+        outState.putBoolean(STATE_NUM, num);
+        outState.putBoolean(STATE_PI, pi);
+        outState.putBoolean(STATE_POW, pow);
+        outState.putBoolean(STATE_ROOT, root);
+        outState.putBoolean(STATE_SCI, sci);
+        outState.putBoolean(STATE_SQR, sqr);
+        outState.putBoolean(STATE_SUB, sub);
     }
 
     /**
@@ -1152,29 +1151,29 @@ public class MainActivity extends AppCompatActivity {
         list.addAll((ArrayList<String>) savedInstanceState.getSerializable(STATE_LIST));
         edttxt.setText(savedInstanceState.getString(STATE_TEXT));
         edttxt2.setText(savedInstanceState.getString(STATE_TEXT2));
+        store = savedInstanceState.getString(STATE_STORE);
+        total = savedInstanceState.getFloat(STATE_TOTAL);
         val_one = savedInstanceState.getFloat(STATE_VAL1);
         val_two = savedInstanceState.getFloat(STATE_VAL2);
-        total = savedInstanceState.getFloat(STATE_TOTAL);
-        add = savedInstanceState.getBoolean(STATE_ADD);
-        sub = savedInstanceState.getBoolean(STATE_SUB);
-        mul = savedInstanceState.getBoolean(STATE_MUL);
-        div = savedInstanceState.getBoolean(STATE_DIV);
-        dec = savedInstanceState.getBoolean(STATE_DEC);
-        pow = savedInstanceState.getBoolean(STATE_POW);
-        mod = savedInstanceState.getBoolean(STATE_MOD);
-        error = savedInstanceState.getBoolean(STATE_ERROR);
-        store = savedInstanceState.getString(STATE_STORE);
-        pi = savedInstanceState.getBoolean(STATE_PI);
-        num = savedInstanceState.getBoolean(STATE_NUM);
-        eul = savedInstanceState.getBoolean(STATE_EUL);
-        sci = savedInstanceState.getBoolean(STATE_SCI);
-        root = savedInstanceState.getBoolean(STATE_ROOT);
-        sqr = savedInstanceState.getBoolean(STATE_SQR);
-        log = savedInstanceState.getBoolean(STATE_LOG);
-        ln = savedInstanceState.getBoolean(STATE_LN);
-        fact = savedInstanceState.getBoolean(STATE_FACT);
         abs = savedInstanceState.getBoolean(STATE_ABS);
-        inv = savedInstanceState.getBoolean(STATE_INV);
+        add = savedInstanceState.getBoolean(STATE_ADD);
+        dec = savedInstanceState.getBoolean(STATE_DEC);
+        div = savedInstanceState.getBoolean(STATE_DIV);
         eql = savedInstanceState.getBoolean(STATE_EQL);
+        error = savedInstanceState.getBoolean(STATE_ERROR);
+        eul = savedInstanceState.getBoolean(STATE_EUL);
+        fact = savedInstanceState.getBoolean(STATE_FACT);
+        inv = savedInstanceState.getBoolean(STATE_INV);
+        ln = savedInstanceState.getBoolean(STATE_LN);
+        log = savedInstanceState.getBoolean(STATE_LOG);
+        mod = savedInstanceState.getBoolean(STATE_MOD);
+        mul = savedInstanceState.getBoolean(STATE_MUL);
+        num = savedInstanceState.getBoolean(STATE_NUM);
+        pi = savedInstanceState.getBoolean(STATE_PI);
+        pow = savedInstanceState.getBoolean(STATE_POW);
+        root = savedInstanceState.getBoolean(STATE_ROOT);
+        sci = savedInstanceState.getBoolean(STATE_SCI);
+        sqr = savedInstanceState.getBoolean(STATE_SQR);
+        sub = savedInstanceState.getBoolean(STATE_SUB);
     }
 }
