@@ -1,0 +1,240 @@
+// UML state machine diagram in Umple representing an automatic transmission
+//  From Book by Lethbridge and Laganiere, McGraw Hill 2004
+//  Object-Oriented Software Engineering: Practical Software Engineering using UML and Java
+//  See http://www.lloseng.com
+
+class SimpleCalculator {
+
+    float val_one = 0, val_two = 0, total = 0;
+    String store = "";
+    boolean add = false;
+    boolean sub = false;
+    boolean mul = false;
+    boolean div = false;
+    boolean dec = false;
+    boolean pow = false;
+    boolean mod = false;
+    boolean pi = false;
+    boolean num = false;
+    boolean eul = false;
+    boolean sci = false;
+    boolean root = false;
+    boolean sqr = false;
+    boolean log = false;
+    boolean ln = false;
+    boolean fact = false;
+    boolean abs = false;
+    boolean inv = false;
+    boolean eql = false;
+    boolean isAddButtonPressed = false;
+    boolean isSubButtonPressed = false;
+    boolean isMulButtonPressed = false;
+    boolean isDivButtonPressed = false;
+    boolean isDecButtonPressed = false;
+    boolean isPowButtonPressed = false;
+    boolean isModButtonPressed = false;
+    boolean isPiButtonePressed = false;
+    boolean isNumButtonPressed = false;
+    boolean isEulButtonPressed = false;
+    boolean isSciButtonPressed = false;
+    boolean isRootButtonPressed = false;
+    boolean isSqrButtonPressed = false;
+    boolean isLogButtonPressed = false;
+    boolean isLnButtonPressed = false;
+    boolean isFactButtonPressed = false;
+    boolean isAbsButtonPressed = false;
+    boolean isInvButtonPressed = false;
+    boolean isEqualsButtonPressed = false;
+    boolean isClearBUttonPressed = false;
+    boolean isNegButtonPressed = false;
+    boolean error=false;
+    boolean screenRotated=false;
+  
+    calculatorOperating{
+      waiting{
+        entry/{
+        }
+              numberButtonPressed[!specialTest()&&!abs&&!eql]/{setIsNumButtonPressed(true);}->number;
+              additionButtonPressed/{setIsAddButtonPressed(true);}->addition;
+              subtractionButtonPressed/{setIsSubButtonPressed(true);}->subtraction;
+              multiplicationButtonPressed/{setIsMulButtonPressed(true);}->multiplication;
+              divisionButtonPressed/{setIsDivButtonPressed(true);}->division;
+              equalsButtonPressed[add||sub||mul||div||pow||mod]/{setIsEqualsButtonPressed(true);}->equals;
+              decimalButtonPressed[!dec]/{setIsDecButtonPressed(true);}->decimal;
+              clearButtonPressed/{setIsClearButtonPressed(true);}->clear;
+              negativeButtonPressed/{setIsNegButtonPressed(true);}->negative;
+              piButtonPressed[screenRotated&&!dec||!num]/{setIsPiButtonPressed(true);}->pi;
+              eulerButtonPressed[screenRotated&&!dec||!num]/{setIsEulButtonPressed(true);}->euler;
+              absoluteButtonPressed[screenRotated]/{setIsAbsButtonPressed(true);}->absolute;
+              inverseButtonPressed[screenRotated]/{setIsInvButtonPressed(true);}->inverse;
+              factorialButtonPressed[screenRotated]/{setIsFactButtonPressed(true);}->factorial;
+              lnButtonPressed[screenRotated]/{setIsLnButtonPressed(true);}->ln;
+              logButtonPressed[screenRotated]/{setIsLogButtonPressed(true);}->log;
+              moduloButtonPressed[screenRotated]/{setIsModButtonPressed(true);}->modulo;
+              powerButtonPressed[screenRotated]/{setIsPowButtonPressed(true);}->power;
+              rootButtonPressed[screenRotated]/{setIsRootButtonPressed(true);}->root;
+              scientificButtonPressed[screenRotated]/{setIsSciButtonPressed(true);}->scientific;
+              squareButtonPressed[screenRotated]/{setIsSqrButtonPressed(true);}->square;
+              rotateScreen/{setScreenRotated(!screenRotated)}->waiting;
+      }
+      Normal {
+        number{
+          entry/{
+            setIsNumButtonPressed(false);
+          }
+          numEnteredOnScreens/{setNum(true);}->waiting;
+        }
+          addition {
+              entry/{
+                  setIsAddButtonPressed(false);
+              }
+              dataEnteredInList/{setAdd(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+          }
+    
+          subtraction {
+            entry/{
+                  setIsSubButtonPressed(false);
+              }
+            dataEnteredInList/{setSub(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+          }
+    
+          multiplication{
+            entry/{
+                  setIsMulButtonPressed(false);
+              }
+            dataEnteredInList/{setMul(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+          }
+    
+          division{
+            entry/{
+                  setIsDivButtonPressed(false);
+              }
+            dataEnteredInList/{setDiv(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+          }
+    
+          equals{
+            entry/{
+                  setIsEqualsButtonPressed(false);
+              }
+            dataClaculated/{setAdd(false); setSub(false); setMul(false); setDiv(false); setMod(false); setPow(false); setDec(true); setEql(true);}->waiting;
+          }
+        decimal{
+          entry/{
+                  setIsDecButtonPressed(false);
+              }
+          decimalAddedToScreens/{setDec(true);}->waiting;
+        }
+        clear{
+            entry/{
+                setIsClearButtonPressed(false);
+            }
+          allDataCleared/{negateBool("all");}->waiting;
+        }
+        negative{
+            entry/{
+                  setIsNegButtonPressed(false);
+            }
+          reverseSignOfDataEnteredOnScreens->waiting;
+        }
+      }
+      Scientific{
+        
+        pi{
+              entry/{
+                  setIsPiButtonPressed(false);
+              }
+          piEnteredOnScreens/{setDec(true); setPi(true);}->waiting;
+        }
+        euler{
+                    entry/{
+                  setIsEulButtonPressed(false);
+              }
+          eulersConstantEnteredOnScreens/{setDec(true); setEul(true);}->waiting;
+        }
+        absolute{
+                    entry/{
+                  setIsAbsButtonPressed(false);
+              }
+          absoluteValueCarriedOutOnData/{setAbs(true);}->waiting;
+        }
+        inverse{
+                    entry/{
+                  setIsInvButtonPressed(false);
+              }
+          inversMultaplicativeCarriedOutOnData/{setInv(true);}->waiting;
+        }
+        factorial{
+                    entry/{
+                  setIsFactButtonPressed(false);
+              }
+          factoralCarriedOutOnData/{setFact(true);}->waiting;
+        }
+        ln{
+                    entry/{
+                  setIsLnButtonPressed(false);
+              }
+          lnCarriedOutOnData/{setLn(true);}->waiting;
+        }
+        log{
+                    entry/{
+                  setIsLogButtonPressed(false);
+              }
+          logCarriedOutOnData/{setLog(true);}->waiting;
+        }
+        modulo{
+                    entry/{
+                  setIsModButtonPressed(false);
+              }
+          dataEnteredInList/{setMod(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+        }
+        power{
+                    entry/{
+                  setIsPowButtonPressed(false);
+              }
+          dataEnteredInList/{setPow(true); setDec(false); setEql(false); negateBool("special");}->waiting;
+        }
+        root{
+                    entry/{
+                  setIsRootButtonPressed(false);
+              }
+          rootCarriedOutOnData/{setRoot(true);}->waiting;
+        }
+        scientific{
+                    entry/{
+                  setIsSciButtonPressed(false);
+              }
+          scientificNotationCarriedOutOnData/{setSci(true);}->waiting;
+        }
+        square{
+                    entry/{
+                  setIsSqrButtonPressed(false);
+              }
+          squareCarriedOutOnData/{setSqr(true);}->waiting;
+        }
+        
+      }
+   }
+  protected void negateBool(String check){
+      if(check.equals("all"))
+         add=sub=mul=div=dec=pow=mod=pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=eql=false;
+      if(check.equals("special"))
+         pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=false;
+  }
+  protected boolean specialTest(){
+    return pi||eul||sci||root||sqr||log||ln||fact||inv;
+  }
+  
+}//$?[End_of_model]$?
+
+namespace -;
+
+
+class SimpleCalculator
+{
+  position 50 30 109 45;
+}
+
+class SimpleCalculator
+{
+  position 50 30 109 45;
+}
