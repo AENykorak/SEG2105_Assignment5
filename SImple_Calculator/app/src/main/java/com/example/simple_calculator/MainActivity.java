@@ -41,7 +41,7 @@ import java.lang.Math;
 import java.math.BigInteger;
 
 public class MainActivity extends AppCompatActivity {
-    //STATIC DECLARATIONS FOR STATE RETENTION
+    //region STATIC DECLARATIONS FOR STATE RETENTION
     static final String STATE_ADD = "add";
     static final String STATE_DEC = "dec";
     static final String STATE_DIV = "div";
@@ -56,15 +56,30 @@ public class MainActivity extends AppCompatActivity {
     static final String STATE_TOTAL = "total";
     static final String STATE_VAL1 = "valOne";
     static final String STATE_VAL2 = "valTwo";
+    static final String STATE_STORE = "store";
+    static final String STATE_PI = "pi";
+    static final String STATE_NUM = "num";
+    static final String STATE_EUL = "eul";
+    static final String STATE_SCI = "sci";
+    static final String STATE_ROOT = "root";
+    static final String STATE_SQR = "sqr";
+    static final String STATE_LOG = "log";
+    static final String STATE_LN = "ln";
+    static final String STATE_FACT = "fact";
+    static final String STATE_ABS = "abs";
+    static final String STATE_INV = "inv";
+    static final String STATE_EQL = "eql";
+    //endregion
 
-    //DECLARATION AND INITIALIZATION OF VARIABLES
+    //region DECLARATION AND INITIALIZATION OF VARIABLES
     Button button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, buttonPi, buttonEul, buttonAbs, buttonAdd, buttonC, buttonDivision, buttonEqual, buttonMul, buttonNeg, buttonSub, buttonFact, buttonLn, buttonLog, buttonMod, buttonPow, buttonRoot, buttonSci, buttonSqr, buttonInv;
     TextView edttxt, edttxt2;
     float val_one = 0, val_two = 0, total = 0;
     String store = "";
-    boolean add, sub, mul, div, dec, pow, mod, pi, num, eul, sci, root, sqr, log, ln, fact, abs, inv;
+    boolean add, sub, mul, div, dec, pow, mod, pi, num, eul, sci, root, sqr, log, ln, fact, abs, inv, eql;
     boolean error=false;
     ArrayList<String> list = new ArrayList<>();
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        //INITIALIZATION OF BUTTONS
+        //region INITIALIZATION OF BUTTONS
         button0=(Button)findViewById(R.id.btn0);
         button1=(Button)findViewById(R.id.btn1);
         button2=(Button)findViewById(R.id.btn2);
@@ -104,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         buttonLn=(Button)findViewById(R.id.btn_ln);
         buttonLog=(Button)findViewById(R.id.btn_log);
         buttonNeg=(Button)findViewById(R.id.btn_neg);
+        //endregion
 
         /**
         * INITIALIZATION OF TEXT SCREENS
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             val_one = savedInstanceState.getFloat(STATE_VAL1);
             val_two = savedInstanceState.getFloat(STATE_VAL2);
             total = savedInstanceState.getFloat(STATE_TOTAL);
+            store = savedInstanceState.getString(STATE_TOTAL);
             add = savedInstanceState.getBoolean(STATE_ADD);
             sub = savedInstanceState.getBoolean(STATE_SUB);
             mul = savedInstanceState.getBoolean(STATE_MUL);
@@ -131,6 +148,18 @@ public class MainActivity extends AppCompatActivity {
             pow = savedInstanceState.getBoolean(STATE_POW);
             mod = savedInstanceState.getBoolean(STATE_MOD);
             error = savedInstanceState.getBoolean(STATE_ERROR);
+            pi = savedInstanceState.getBoolean(STATE_PI);
+            num = savedInstanceState.getBoolean(STATE_NUM);
+            eul = savedInstanceState.getBoolean(STATE_EUL);
+            sci = savedInstanceState.getBoolean(STATE_SCI);
+            root = savedInstanceState.getBoolean(STATE_ROOT);
+            sqr = savedInstanceState.getBoolean(STATE_SQR);
+            log = savedInstanceState.getBoolean(STATE_LOG);
+            ln = savedInstanceState.getBoolean(STATE_LN);
+            fact = savedInstanceState.getBoolean(STATE_FACT);
+            abs = savedInstanceState.getBoolean(STATE_ABS);
+            inv = savedInstanceState.getBoolean(STATE_INV);
+            eql = savedInstanceState.getBoolean(STATE_EQL);
         }
 
         /**
@@ -142,9 +171,10 @@ public class MainActivity extends AppCompatActivity {
         * BUTTON 0 THROUGH 9 ACTION ON CLICK
         * WHEN BUTTON PRESSED OUTPUTS SPECIFIED NUMBER TO BOTH SCREENS
         */
+        //region Button 0 through 9 click listener
         button0.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "0");
                 edttxt2.setText(edttxt2.getText() + "0");
                 num=true;
@@ -152,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button1.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "1");
                 edttxt2.setText(edttxt2.getText() + "1");
                 num=true;
@@ -160,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button2.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "2");
                 edttxt2.setText(edttxt2.getText() + "2");
                 num=true;
@@ -168,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button3.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "3");
                 edttxt2.setText(edttxt2.getText() + "3");
                 num=true;
@@ -176,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button4.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "4");
                 edttxt2.setText(edttxt2.getText() + "4");
                 num=true;
@@ -184,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button5.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "5");
                 edttxt2.setText(edttxt2.getText() + "5");
                 num=true;
@@ -192,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button6.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "6");
                 edttxt2.setText(edttxt2.getText() + "6");
                 num=true;
@@ -200,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button7.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "7");
                 edttxt2.setText(edttxt2.getText() + "7");
                 num=true;
@@ -208,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         });
         button8.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "8");
                 edttxt2.setText(edttxt2.getText() + "8");
                 num=true;
@@ -216,12 +246,13 @@ public class MainActivity extends AppCompatActivity {
         });
         button9.setOnClickListener((v) -> {
             if(error){ edttxt.setText(""); error=false;}
-            if(!specialTest()&&!abs) {
+            if(!specialTest()&&!abs&&!eql) {
                 edttxt.setText(edttxt.getText() + "9");
                 edttxt2.setText(edttxt2.getText() + "9");
                 num=true;
             }
         });
+        //endregion
 
         /**
         * DECIMAL ACTION ON CLICK
@@ -254,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
                     list.add((String)edttxt.getText());
                     list.add("+");
                     add=true;
+                    dec=false;
+                    eql=false;
                     negateBool("special");
                     edttxt.setText(null);
                     edttxt2.setText(edttxt2.getText()+"+");
@@ -292,6 +325,8 @@ public class MainActivity extends AppCompatActivity {
                     list.add((String)edttxt.getText());
                     list.add("/");
                     div=true;
+                    dec=false;
+                    eql=false;
                     negateBool("special");
                     edttxt.setText(null);
                     edttxt2.setText(edttxt2.getText()+"/");
@@ -428,6 +463,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 edttxt.setText(total+"");
                 edttxt2.setText(total+"");
+                dec=true;
+                eql=true;
                 pow=false;
             }
         });
@@ -446,6 +483,8 @@ public class MainActivity extends AppCompatActivity {
                     list.add((String)edttxt.getText());
                     list.add("*");
                     mul=true;
+                    dec=false;
+                    eql=false;
                     negateBool("special");
                     edttxt.setText(null);
                     edttxt2.setText(edttxt2.getText()+"*");
@@ -505,6 +544,8 @@ public class MainActivity extends AppCompatActivity {
                     list.add((String)edttxt.getText());
                     list.add("-");
                     sub=true;
+                    dec=false;
+                    eql=false;
                     negateBool("special");
                     edttxt.setText(null);
                     edttxt2.setText(edttxt2.getText()+"-");
@@ -775,6 +816,8 @@ public class MainActivity extends AppCompatActivity {
                         list.add((String)edttxt.getText());
                         list.add("%");
                         mod=true;
+                        dec=false;
+                        eql=false;
                         negateBool("special");
                         edttxt2.setText((String)edttxt2.getText()+"Mod");
                         edttxt.setText(null);
@@ -796,6 +839,8 @@ public class MainActivity extends AppCompatActivity {
                         list.add((String)edttxt.getText());
                         list.add("^X");
                         pow=true;
+                        dec=false;
+                        eql=false;
                         dec=pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=false;
                         edttxt2.setText((String)edttxt2.getText()+"^");
                         edttxt.setText(null);
@@ -837,14 +882,14 @@ public class MainActivity extends AppCompatActivity {
                             int pos = position();
                             String edit=base.substring(pos);
                             base=base.substring(0,pos);
-                            edttxt2.setText(base+(char)8730+edit);
+                            edttxt2.setText(base+"("+(char)8730+edit+")");
                         }
                         else {
                             String base = (String) edttxt2.getText();
                             String edit = (String) edttxt.getText();
                             int pos = base.lastIndexOf(edit);
                             base = base.substring(0, pos);
-                            edttxt2.setText(base+(char)8730+edit);
+                            edttxt2.setText(base+"("+(char)8730+edit+")");
                         }
                         edttxt.setText(String.valueOf((Math.sqrt(Float.parseFloat((String) edttxt.getText())))));
                         root=true;
@@ -866,104 +911,29 @@ public class MainActivity extends AppCompatActivity {
                         edttxt.setText("0");
                         error = false;
                     }
-                    if (((String) edttxt.getText()).equals("")||((String) edttxt.getText()).equals("Infinity")||pow) {
-                    } else {
-                          if(log||ln||pi||eul||root||fact||inv){
-                              String base = (String) edttxt2.getText();
-                              String power = "";
-                              int pos = position();
-                              String loop = base.substring(pos);
-                              base=base.substring(0,pos);
-                              for (int i = 0; i < loop.length(); i++) {
-                                  if (loop.charAt(i) == '-') {
-                                      String code = "207B";
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  else if (loop.charAt(i) == '1') {
-                                      String code = "00B9";
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  else if (loop.charAt(i) == '2' || loop.charAt(i) == '3') {
-                                      String code = "00B" + loop.charAt(i);
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  else if (loop.charAt(i) == '.')
-                                      power = power + "ᐧ";
-                                  else if (loop.charAt(i) =='/')
-                                      power=power+'ᐟ';
-                                  else if(loop.charAt(i) == 'L')
-                                      power = power+'ᴸ';
-                                  else if(loop.charAt(i)=='π')
-                                      power=power+"ᵖⁱ";
-                                  else if(loop.charAt(i)=='o')
-                                      power=power+'ᵒ';
-                                  else if(loop.charAt(i)=='g')
-                                      power=power+'ᵍ';
-                                  else if(loop.charAt(i)=='(')
-                                      power=power+'⁽';
-                                  else if(loop.charAt(i)==')')
-                                      power=power+'⁾';
-                                  else if(loop.charAt(i)=='n')
-                                      power=power+'ⁿ';
-                                  else if(loop.charAt(i)=='e')
-                                      power=power+'ᵉ';
-                                  else if(loop.charAt(i)=='!')
-                                      power=power+'ᵎ';
-                                  else if(loop.charAt(i)=='√')
-                                      power=power+"ᐠᶴ";
-                                  else if(loop.charAt(i)=='E')
-                                      power=power+'ᴱ';
-                                  else {
-                                      String code = "207" + loop.charAt(i);
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                              }
-                              edttxt2.setText(base + "10" + power);
-                          }
-                          else{
-                              String base = (String) edttxt2.getText();
-                              int pos=0;
+                    if (((String) edttxt.getText()).equals("")||((String) edttxt.getText()).equals("Infinity")) {
+                    }
+                    else {
+                        String base = (String) edttxt2.getText();
+                            int pos=0;
                               String edit="";
-                              if(sci||sqr) {
+                              if(specialTest()) {
                                   pos = position();
-                                  edit = (String) edttxt.getText();
+                                  edit=base.substring(pos);
                               }
                               else {
                                   edit = (String) edttxt.getText();
                                   pos = base.lastIndexOf(edit);
                               }
-                              String power = "";
-                              for (int i = 0; i < edit.length(); i++) {
-                                  if (edit.charAt(i) == '-') {
-                                    String code = "207B";
-                                    power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  if (edit.charAt(i) == '1') {
-                                      String code = "00B9";
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  else if (edit.charAt(i) == '2' || edit.charAt(i) == '3') {
-                                      String code = "00B" + edit.charAt(i);
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                                  else if (edit.charAt(i) == '.') {
-                                      power = power + 'ᐧ';
-                                  }
-                                  else if(edit.charAt(i)=='E')
-                                      power=power+'ᴱ';
-                                  else {
-                                      String code = "207" + edit.charAt(i);
-                                      power = power + String.valueOf(Character.toChars(Integer.parseInt(code, 16)));
-                                  }
-                              }
-
                               base = base.substring(0, pos);
-                              edttxt2.setText(base + "10" + power);
+                              edit="10^(" + edit+")";
+                              edttxt2.setText(base + edit);
+                              store=edit;
                           }
                         edttxt.setText(String.valueOf((float) Math.pow(10, (double) (Float.parseFloat((String) edttxt.getText())))));
+                        negateBool("special");
                         sci = true;
                     }
-                }
             });
 
             /**
@@ -993,13 +963,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (((String) edttxt.getText()).equals("")) {
                     } else {
-                        store=(String)edttxt.getText();
+                        String base = (String) edttxt2.getText();
+                        int pos=0;
+                        String edit="";
+                        if(specialTest()) {
+                            pos = position();
+                            edit=base.substring(pos);
+                        }
+                        else {
+                            edit = (String) edttxt.getText();
+                            pos = base.lastIndexOf(edit);
+                        }
+                        base = base.substring(0, pos);
+                        edit="(" + edit+")²";
+                        edttxt2.setText(base + edit);
+                        store=edit;
+                    }
                         edttxt.setText(String.valueOf((Float.parseFloat((String) edttxt.getText())) * (Float.parseFloat((String) edttxt.getText()))));
-                        edttxt2.setText(edttxt2.getText() + "²");
-                        val_one=Float.parseFloat((String)edttxt.getText());
+                    negateBool("Special");
                         sqr=true;
                     }
-                }
             });
         }
     }
@@ -1010,14 +993,12 @@ public class MainActivity extends AppCompatActivity {
         if(pi||eul)
             pos=base.length()-1;
         if(root)
-            pos=base.lastIndexOf((char)8730);
-        if(sci)
-            pos=base.lastIndexOf("10");
+            pos=base.lastIndexOf("("+(char)8730);
         if(log)
             pos=base.lastIndexOf("Log");
         if(ln)
             pos=base.lastIndexOf("Ln");
-        if(sqr||fact)
+        if(sqr||fact||sci)
             pos=base.lastIndexOf(store);
         if(inv)
             pos=base.lastIndexOf("1/");
@@ -1031,9 +1012,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected void negateBool(String check){
         if(check.equals("all"))
-            add=sub=mul=div=dec=pow=mod=pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=false;
+            add=sub=mul=div=dec=pow=mod=pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=eql=false;
         else if(check.equals("special"))
-            dec=pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=false;
+            pi=num=eul=sci=root=sqr=log=ln=fact=abs=inv=false;
     }
 
         /**
@@ -1058,6 +1039,19 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean(STATE_POW, pow);
         outState.putBoolean(STATE_MOD, mod);
         outState.putBoolean(STATE_ERROR, error);
+        outState.putString(STATE_STORE, store);
+        outState.putBoolean(STATE_PI, pi);
+        outState.putBoolean(STATE_NUM, num);
+        outState.putBoolean(STATE_EUL, eul);
+        outState.putBoolean(STATE_SCI, sci);
+        outState.putBoolean(STATE_ROOT, root);
+        outState.putBoolean(STATE_SQR, sqr);
+        outState.putBoolean(STATE_LOG, log);
+        outState.putBoolean(STATE_LN, ln);
+        outState.putBoolean(STATE_FACT, fact);
+        outState.putBoolean(STATE_ABS, abs);
+        outState.putBoolean(STATE_INV, inv);
+        outState.putBoolean(STATE_EQL, eql);
     }
 
     /**
@@ -1082,5 +1076,18 @@ public class MainActivity extends AppCompatActivity {
         pow = savedInstanceState.getBoolean(STATE_POW);
         mod = savedInstanceState.getBoolean(STATE_MOD);
         error = savedInstanceState.getBoolean(STATE_ERROR);
+        store = savedInstanceState.getString(STATE_STORE);
+        pi = savedInstanceState.getBoolean(STATE_PI);
+        num = savedInstanceState.getBoolean(STATE_NUM);
+        eul = savedInstanceState.getBoolean(STATE_EUL);
+        sci = savedInstanceState.getBoolean(STATE_SCI);
+        root = savedInstanceState.getBoolean(STATE_ROOT);
+        sqr = savedInstanceState.getBoolean(STATE_SQR);
+        log = savedInstanceState.getBoolean(STATE_LOG);
+        ln = savedInstanceState.getBoolean(STATE_LN);
+        fact = savedInstanceState.getBoolean(STATE_FACT);
+        abs = savedInstanceState.getBoolean(STATE_ABS);
+        inv = savedInstanceState.getBoolean(STATE_INV);
+        eql = savedInstanceState.getBoolean(STATE_EQL);
     }
 }
