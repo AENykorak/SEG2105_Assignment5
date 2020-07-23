@@ -11,7 +11,9 @@ To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the
 * The MainActivity.java file is the code for the operation of the calculator. It holds the running and helper methods that allow it to function. Any additional features should be implimented here.
 * Lastley, the AndroidManifest.xml file is what controls the general operation of the app. This is where the orientation feature was implimented to function off the sensor within the phone.
 
-
+### Umple Files
+An Umple file has been included in the repository and can be used at http://cruise.eecs.uottawa.ca/umpleonline/.
+It shows the general operation and action sequence of the calculator to get a basic understanding of how each button should interact with the next.
 
 # MainActivity Javadoc Summary
 
@@ -24,11 +26,8 @@ To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the
 
 ## Updated Code Info and Author
 This simple calculator implements both a standard and scientific display orientation.
-
 It follows standard conventions for order of operations
-
 When in portrait orientation the calculator will be in standard mode.
-
 When in landscape orientation the calculator will be in scientific mode.
 
 Operations available in both modes:
@@ -50,11 +49,8 @@ Operations only available in scientific mode:
 * square root
 * scientific notation
 * square
-
 @author Adam Nykorak, University of Ottawa Student, Faculty of Engineering
-
 @version 3.3
-
 @since 2020-07-13
 
 	ALL ACTIONS AFTER THIS COMMENT ARE SHARED BETWEEN BOTH PORTRAIT (NORMAL) AND LANDSCAPE (SCIENTIFIC) STATES.
