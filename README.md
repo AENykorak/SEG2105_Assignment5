@@ -24,9 +24,13 @@ To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the
 
 ## Updated Code Info and Author
 This simple calculator implements both a standard and scientific display orientation.
+
 It follows standard conventions for order of operations
+
 When in portrait orientation the calculator will be in standard mode.
+
 When in landscape orientation the calculator will be in scientific mode.
+
 Operations available in both modes:
 * numbers 0-9
 * addition
@@ -45,8 +49,11 @@ Operations only available in scientific mode:
 * square root
 * scientific notation
 * square
+
 @author Adam Nykorak, University of Ottawa Student, Faculty of Engineering
+
 @version 3.3
+
 @since 2020-07-13
 
 	ALL ACTIONS AFTER THIS COMMENT ARE SHARED BETWEEN BOTH PORTRAIT (NORMAL) AND LANDSCAPE (SCIENTIFIC) STATES.
