@@ -5,18 +5,24 @@ It is an updated version of Professor Garzon's Simple Calculator lab assignment,
 The base code can be found through the Univeristy of Ottawa's Brightspace link if a student of the course this was created under, or by contacting the origional author.
 It is designed to do basic operations and calculations and has 2 modes as detailed below.
 
+To test or edit the program download Android Studio and open the repository file SImple_Calculator as a project. This will allow you to see the code for the program.
+To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the app.
+* Under the source files for the program layout\activity_main.xml is the layout code for the portrait, or Normal mode, and layout-lan\activity_main.xml is the layout for the landscape, or Scientific mode.These two files control the general layout and aesthetics for the calculator.
+* The MainActivity.java file is the code for the operation of the calculator. It holds the running and helper methods that allow it to function. Any additional features should be implimented here.
+* Lastley, the AndroidManifest.xml file is what controls the general operation of the app. This is where the orientation feature was implimented to function off the sensor within the phone.
 
 
-MainActivity Javadoc Summary
 
-Original Code Author
- Title: Creating a Simple Calculator For Android
- Author: Miguel Garzon, University of Ottawa Part-Time Professor, Faculty of Engineering, Room: STE 5026, Email: mgarzon@uottawa.ca
- Date: Original 2015, Updated 2017
- Code Version: 1 and 2
- Availability: https://uottawa.brightspace.com/d2l/le/content/158204/viewContent/2842536/View
+# MainActivity Javadoc Summary
 
-Updated Code Info and Author
+## Original Code Author
+ * Title: Creating a Simple Calculator For Android
+ * Author: Miguel Garzon, University of Ottawa Part-Time Professor, Faculty of Engineering, Room: STE 5026, Email: mgarzon@uottawa.ca
+ * Date: Original 2015, Updated 2017
+ * Code Version: 1 and 2
+ * Availability: https://uottawa.brightspace.com/d2l/le/content/158204/viewContent/2842536/View
+
+## Updated Code Info and Author
  This simple calculator implements both a standard and scientific display orientation.
  It follows standard conventions for order of operations
  When in portrait orientation the calculator will be in standard mode.
