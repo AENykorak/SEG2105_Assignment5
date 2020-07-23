@@ -40,6 +40,7 @@ Operations available in both modes:
 * multiplication
 * additive inverse
 * subtraction
+
 Operations only available in scientific mode:
 * factorials
 * natural logarithm
