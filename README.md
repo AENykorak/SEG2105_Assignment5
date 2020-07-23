@@ -7,7 +7,7 @@ It is designed to do basic operations and calculations and has 2 modes as detail
 
 To test or edit the program download Android Studio and open the repository file SImple_Calculator as a project. This will allow you to see the code for the program.
 To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the app.
-* Under the source files for the program layout\activity_main.xml is the layout code for the portrait, or Normal mode, and layout-lan\activity_main.xml is the layout for the landscape, or Scientific mode.These two files control the general layout and aesthetics for the calculator.
+* Under the source files for the program layout\activity_main.xml is the layout code for the portrait, or Normal mode, and layout-land\activity_main.xml is the layout for the landscape, or Scientific mode.These two files control the general layout and aesthetics for the calculator.
 * The MainActivity.java file is the code for the operation of the calculator. It holds the running and helper methods that allow it to function. Any additional features should be implimented here.
 * Lastley, the AndroidManifest.xml file is what controls the general operation of the app. This is where the orientation feature was implimented to function off the sensor within the phone.
 
@@ -23,31 +23,31 @@ To run it, under AVD manager, use Nexus S API 30 as a virtual device and run the
  * Availability: https://uottawa.brightspace.com/d2l/le/content/158204/viewContent/2842536/View
 
 ## Updated Code Info and Author
- This simple calculator implements both a standard and scientific display orientation.
- It follows standard conventions for order of operations
- When in portrait orientation the calculator will be in standard mode.
- When in landscape orientation the calculator will be in scientific mode.
- Operations available in both modes:
-      numbers 0-9
-      addition
-      clear
-      division
-      equals
-      multiplication
-      additive inverse
-      subtraction
- Operations only available in scientific mode:
-      factorials
-      natural logarithm
-      logarithm base 10
-      modulo
-      power
-      square root
-      scientific notation
-      square
- @author Adam Nykorak, University of Ottawa Student, Faculty of Engineering
- @version 3.3
- @since 2020-07-13
+This simple calculator implements both a standard and scientific display orientation.
+It follows standard conventions for order of operations
+When in portrait orientation the calculator will be in standard mode.
+When in landscape orientation the calculator will be in scientific mode.
+Operations available in both modes:
+* numbers 0-9
+* addition
+* clear
+* division
+* equals
+* multiplication
+* additive inverse
+* subtraction
+Operations only available in scientific mode:
+* factorials
+* natural logarithm
+* logarithm base 10
+* modulo
+* power
+* square root
+* scientific notation
+* square
+@author Adam Nykorak, University of Ottawa Student, Faculty of Engineering
+@version 3.3
+@since 2020-07-13
 
 	ALL ACTIONS AFTER THIS COMMENT ARE SHARED BETWEEN BOTH PORTRAIT (NORMAL) AND LANDSCAPE (SCIENTIFIC) STATES.
 	ANY INPUT WILL BE EITHER RETAINED ON THE SCREENS OR IN THE LIST OF VARIABLES
