@@ -7,16 +7,16 @@ It is designed to do basic operations and calculations and has 2 modes as detail
 
 
 
-MainActivity Javadoc Summary
+#MainActivity Javadoc Summary
 
-Original Code Author
+#Original Code Author
  Title: Creating a Simple Calculator For Android
  Author: Miguel Garzon, University of Ottawa Part-Time Professor, Faculty of Engineering, Room: STE 5026, Email: mgarzon@uottawa.ca
  Date: Original 2015, Updated 2017
  Code Version: 1 and 2
  Availability: https://uottawa.brightspace.com/d2l/le/content/158204/viewContent/2842536/View
 
-Updated Code Info and Author
+#Updated Code Info and Author
  This simple calculator implements both a standard and scientific display orientation.
  It follows standard conventions for order of operations
  When in portrait orientation the calculator will be in standard mode.
