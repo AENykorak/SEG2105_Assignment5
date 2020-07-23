@@ -1,4 +1,4 @@
-# SEG2105_Assignment5
+# Simple Calculator
 
 This calculator was made using Android Studio 4.0.1 using Java Version 8 Update 241.
 It is an updated version of Professor Garzon's Simple Calculator lab assignment, which was used as the basis for this project.
